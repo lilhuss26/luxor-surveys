@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استبيان اليوم الثاني — ملتقى الأقصر للسينما الإفريقية</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Language Selection Modal -->
+<div id="language-modal">
+  <div class="lang-modal-content">
+    <div class="lang-modal-title">اختر لغتك</div>
+    <div class="lang-modal-subtitle">Select Your Language · Choisissez votre langue</div>
+    <div class="lang-options">
+      <button class="lang-btn" onclick="selectLanguage('ar')">العربية</button>
+      <button class="lang-btn" onclick="selectLanguage('en')">English</button>
+      <button class="lang-btn" onclick="selectLanguage('fr')">Français</button>
+    </div>
+  </div>
+</div>
+
+<!-- User Info Modal -->
+<div id="user-info-modal" class="hidden">
+  <div class="user-info-content">
+    <div class="user-info-title">معلوماتك</div>
+    <div class="user-info-subtitle">نحتاج بعض المعلومات قبل البدء</div>
+    <form id="user-info-form" onsubmit="submitUserInfo(event)">
+      <div class="form-group">
+        <label for="user-name" class="form-label">الاسم</label>
+        <input type="text" id="user-name" class="form-input" placeholder="أدخل اسمك الكامل" required>
+        <div id="name-error" class="form-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="user-email" class="form-label">البريد الإلكتروني</label>
+        <input type="email" id="user-email" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+        <div id="email-error" class="form-error"></div>
+      </div>
+      <button type="submit" class="form-submit">متابعة إلى الاستبيان</button>
+    </form>
+  </div>
+</div>
+
+<!-- Survey 2 - Day Two -->
+<div id="survey-s2" class="survey-screen s2" style="display: none;">
+  <div class="survey-header">
+    <button class="back-btn" onclick="window.location.href='index.html'">← العودة</button>
+    <div class="survey-header-title">سينما مسؤولة ومشتركة: الاستدامة البيئية وتبادل الخبرات</div>
+    <div class="survey-header-sub">Responsible & Collaborative Cinema</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="prog-s2" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="prog-text-s2">0 / 9</div>
+  </div>
+
+  <div class="questions-container">
+
+    <!-- Q1 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 01</div>
+      <div class="q-text">أين يقف مهرجانك أو مؤسستك اليوم في مسار الاستدامة البيئية؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q2-1','بدأنا للتو — لا سياسة بيئية حتى الآن')">بدأنا للتو — لا سياسة بيئية حتى الآن</div>
+        <div class="choice-btn" onclick="select(this,'q2-1','نفكر ونخطط')">نفكر ونخطط</div>
+        <div class="choice-btn" onclick="select(this,'q2-1','نطبّق بعض الممارسات بالفعل')">نطبّق بعض الممارسات بالفعل</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 02</div>
+      <div class="q-text">أيّ المقترحات العملية التي نوقشت حول الاستدامة بدا لك الأكثر قابلية للتطبيق فعلًا؟</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="شاركنا رأيك هنا..." oninput="trackText(this,'q2-2','s2')"></textarea>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 03</div>
+      <div class="q-text">"يجب أن يصدر كل مهرجان إفريقي سياسة بيئية مكتوبة خلال السنتين القادمتين."<br>هل هذا ممكن في سياقك؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q3','نعم، وهذا ما سأسعى لتحقيقه')">نعم، وهذا ما سأسعى لتحقيقه</div>
+        <div class="choice-btn" onclick="select(this,'q3','ممكن إذا توفرت الموارد والدعم التقني')">ممكن إذا توفرت الموارد والدعم التقني</div>
+        <div class="choice-btn" onclick="select(this,'q3','صعب في ظل تحديات التمويل الأساسية التي نواجهها')">صعب في ظل تحديات التمويل الأساسية التي نواجهها</div>
+        <div class="choice-btn" onclick="select(this,'q3','الأولويات مختلفة، البنية التحتية أولًا')">الأولويات مختلفة، البنية التحتية أولًا</div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 04</div>
+      <div class="q-text">أيّ نموذج شراكة بدا لك الأكثر واقعية وفائدة في جلسة التعاون بين المهرجانات؟</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="شاركنا رأيك هنا..." oninput="trackText(this,'q4-s2','s2')"></textarea>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 05</div>
+      <div class="q-text">اختر إجراءً واحدًا ستستكشف إمكانية تطبيقه في مؤسستك خلال العام القادم</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q5','إطلاق برنامج حول البيئة والعدالة المناخية')">إطلاق برنامج حول البيئة والعدالة المناخية</div>
+        <div class="choice-btn" onclick="select(this,'q5','بناء شراكة برمجية مع مهرجان آخر في المنطقة')">بناء شراكة برمجية مع مهرجان آخر في المنطقة</div>
+        <div class="choice-btn" onclick="select(this,'q5','وضع سياسة بيئية مكتوبة ولو أولية')">وضع سياسة بيئية مكتوبة ولو أولية</div>
+        <div class="choice-btn" onclick="select(this,'q5','استخدام حاسبة الكربون في النسخة القادمة')">استخدام حاسبة الكربون في النسخة القادمة</div>
+        <div class="choice-btn" onclick="select(this,'q5','مشاركة تجربتنا مع مهرجانات أصغر')">مشاركة تجربتنا مع مهرجانات أصغر</div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 06</div>
+      <div class="q-text">من كان غائبًا من المحادثة ويجب أن يكون حاضرًا؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q6','مهرجانات من غرب أو وسط إفريقيا')">مهرجانات من غرب أو وسط إفريقيا</div>
+        <div class="choice-btn" onclick="select(this,'q6','ممثلو مجتمعات متأثرة بالتغير المناخي')">ممثلو مجتمعات متأثرة بالتغير المناخي</div>
+        <div class="choice-btn" onclick="select(this,'q6','مموّلون ومانحون')">مموّلون ومانحون</div>
+        <div class="choice-btn" onclick="select(this,'q6','صناع أفلام ناشئون من المهرجانات الأصغر')">صناع أفلام ناشئون من المهرجانات الأصغر</div>
+        <div class="choice-btn" onclick="select(this,'q6','التمثيل كان متوازنًا بشكل جيد')">التمثيل كان متوازنًا بشكل جيد</div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 07</div>
+      <div class="q-text">التوصية من اليوم الثاني التي تعتقد أنها قابلة للتطبيق فعلًا خلال عام</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="اكتب هنا..." oninput="trackText(this,'q7-s2','s2')"></textarea>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 08</div>
+      <div class="q-text">كيف تقيّم عمق النقاش في جلستَي اليوم الثاني؟</div>
+      <div class="star-scale">
+        <div class="star-opt" onclick="selectStar(this,'q8-s2','s2')">سطحي<br><small>Surface-level</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q8-s2','s2')">مقبول<br><small>Decent</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q8-s2','s2')">جيد<br><small>Good</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q8-s2','s2')">عميق<br><small>Deep</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q8-s2','s2')">استثنائي<br><small>Exceptional</small></div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 09</div>
+      <div class="q-text">إذا كان بإمكانك توجيه نصيحة واحدة لفريق التنظيم للنسخة القادمة، ماذا ستقول؟</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="نصيحتك هنا..." oninput="trackText(this,'q9-s2','s2')"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="submit-area">
+    <button class="submit-btn" onclick="submitSurvey('s2')">إرسال استبيان اليوم الثاني ←</button>
+  </div>
+</div>
+
+<!-- Thank You Screen -->
+<div id="thankyou" class="thankyou-screen">
+  <div class="ty-icon">🎬</div>
+  <div class="ty-title">شكرًا على مشاركتك</div>
+  <div class="ty-sub">إجاباتك ستُشكّل قرارات النسخة القادمة من الملتقى — صوتك جزء من ذاكرة المهرجان.<br><br><em>Your responses will shape the next edition. Your voice is part of the festival's memory.</em></div>
+  <button class="ty-back" onclick="window.location.href='index.html'">← العودة إلى الاستبيانات</button>
+</div>
+
+<script src="js/translations.js"></script>
+<script src="js/survey.js"></script>
+<script>
+// Initialize survey on load
+document.addEventListener('DOMContentLoaded', function() {
+  currentSurvey = 's2';
+  const savedLang = sessionStorage.getItem('selectedLanguage');
+  const savedUserInfo = sessionStorage.getItem('userInfo');
+  
+  if (savedLang && savedUserInfo) {
+    document.getElementById('survey-s2').style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>

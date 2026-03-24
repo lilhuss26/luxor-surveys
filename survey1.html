@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استبيان اليوم الأول — ملتقى الأقصر للسينما الإفريقية</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Language Selection Modal -->
+<div id="language-modal">
+  <div class="lang-modal-content">
+    <div class="lang-modal-title">اختر لغتك</div>
+    <div class="lang-modal-subtitle">Select Your Language · Choisissez votre langue</div>
+    <div class="lang-options">
+      <button class="lang-btn" onclick="selectLanguage('ar')">العربية</button>
+      <button class="lang-btn" onclick="selectLanguage('en')">English</button>
+      <button class="lang-btn" onclick="selectLanguage('fr')">Français</button>
+    </div>
+  </div>
+</div>
+
+<!-- User Info Modal -->
+<div id="user-info-modal" class="hidden">
+  <div class="user-info-content">
+    <div class="user-info-title">معلوماتك</div>
+    <div class="user-info-subtitle">نحتاج بعض المعلومات قبل البدء</div>
+    <form id="user-info-form" onsubmit="submitUserInfo(event)">
+      <div class="form-group">
+        <label for="user-name" class="form-label">الاسم</label>
+        <input type="text" id="user-name" class="form-input" placeholder="أدخل اسمك الكامل" required>
+        <div id="name-error" class="form-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="user-email" class="form-label">البريد الإلكتروني</label>
+        <input type="email" id="user-email" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+        <div id="email-error" class="form-error"></div>
+      </div>
+      <button type="submit" class="form-submit">متابعة إلى الاستبيان</button>
+    </form>
+  </div>
+</div>
+
+<!-- Survey 1 - Day One -->
+<div id="survey-s1" class="survey-screen s1" style="display: none;">
+  <div class="survey-header">
+    <button class="back-btn" onclick="window.location.href='index.html'">← العودة</button>
+    <div class="survey-header-title">برمجة المستقبل: الذكاء الاصطناعي في السينما الإفريقية</div>
+    <div class="survey-header-sub">Programming the Future: AI & African Cinema</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="prog-s1" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="prog-text-s1">0 / 9</div>
+  </div>
+
+  <div class="questions-container">
+
+    <!-- Q1 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 01</div>
+      <div class="q-text">"لن يُنهي الذكاء الاصطناعي السينما الإفريقية، بل سيكشف من يمتلك رؤية حقيقية ومن لا يمتلكها."</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q1','أوافق تمامًا، الرؤية هي ما يميّز السينمائي')">أوافق تمامًا، الرؤية هي ما يميّز السينمائي</div>
+        <div class="choice-btn" onclick="select(this,'q1','أوافق جزئيًا، لكن الوصول للتقنية عامل حاسم أيضًا')">أوافق جزئيًا، لكن الوصول للتقنية عامل حاسم أيضًا</div>
+        <div class="choice-btn" onclick="select(this,'q1','أختلف، الخطر حقيقي على صناع الأفلام الأفارقة')">أختلف، الخطر حقيقي على صناع الأفلام الأفارقة</div>
+        <div class="choice-btn" onclick="select(this,'q1','أخرى')">أخرى</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 02</div>
+      <div class="q-text">أيّ جلسة من جلستَي اليوم الأول كانت أكثر إثارةً لتفكيرك؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q2','الجلسة الأولى: برمجة أفلام الذكاء الاصطناعي ومعايير الإبداع')">الجلسة الأولى: برمجة أفلام الذكاء الاصطناعي ومعايير الإبداع</div>
+        <div class="choice-btn" onclick="select(this,'q2','الجلسة الثانية: البرمجة الهجينة والتحول الرقمي')">الجلسة الثانية: البرمجة الهجينة والتحول الرقمي</div>
+        <div class="choice-btn" onclick="select(this,'q2','كلتاهما بنفس القدر')">كلتاهما بنفس القدر</div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 03</div>
+      <div class="q-text">ما المعيار الذي يجب أن يحتل مرتبة أعلى في لجنة الاختيار عند تقييم فيلم استخدم الذكاء الاصطناعي؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q3','الرؤية الإخراجية الإنسانية وراء الأداة')">الرؤية الإخراجية الإنسانية وراء الأداة</div>
+        <div class="choice-btn" onclick="select(this,'q3','الابتكار الجمالي أو طريقة استخدام الذكاء الاصطناعي كلغة بصرية')">الابتكار الجمالي أو طريقة استخدام الذكاء الاصطناعي كلغة بصرية</div>
+        <div class="choice-btn" onclick="select(this,'q3','الشفافية الأخلاقية أو الإفصاح عن مصادر البيانات والصور المستخدمة')">الشفافية الأخلاقية أو الإفصاح عن مصادر البيانات والصور المستخدمة</div>
+        <div class="choice-btn" onclick="select(this,'q3','الأثر على الجمهور الإفريقي المحلي والإقليمي')">الأثر على الجمهور الإفريقي المحلي والإقليمي</div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 04</div>
+      <div class="q-text">هل تعتقد أن المهرجانات الإفريقية يجب أن تُنشئ فئة مستقلة لأفلام الذكاء الاصطناعي؟</div>
+      <div class="choices horizontal">
+        <div class="choice-btn" onclick="select(this,'q4','نعم، فئة مستقلة')">نعم، فئة مستقلة</div>
+        <div class="choice-btn" onclick="select(this,'q4','لا، ندمجها مع الفئات القائمة')">لا، ندمجها مع الفئات القائمة</div>
+        <div class="choice-btn" onclick="select(this,'q4','يعتمد على نضج المهرجان')">يعتمد على نضج المهرجان</div>
+        <div class="choice-btn" onclick="select(this,'q4','لم أحسم رأيي بعد')">لم أحسم رأيي بعد</div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 05</div>
+      <div class="q-text">كيف تصنف إحساسك تجاه البرمجة الهجينة في المهرجانات الإفريقية؟</div>
+      <div class="emoji-scale">
+        <div class="emoji-btn" onclick="selectEmoji(this,'q5')">😰<span class="emoji-label">قلق</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q5')">🤔<span class="emoji-label">متردد</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q5')">🙂<span class="emoji-label">متفائل</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q5')">🔥<span class="emoji-label">متحمس</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q5')">🌍<span class="emoji-label">ضرورة حتمية</span></div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 06</div>
+      <div class="q-text">إلى أي حد ينبغي أن تؤثر بيانات المشاهدة (نسب الحضور، التفاعل على المنصات) في القرارات البرمجية؟</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="شاركنا رأيك هنا..." oninput="trackText(this,'q6','s1')"></textarea>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 07</div>
+      <div class="q-text">ما الذي كان غائبًا أو لم يُناقش بما فيه الكفاية في جلستَي اليوم؟</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="شاركنا رأيك هنا..." oninput="trackText(this,'q7','s1')"></textarea>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 08</div>
+      <div class="q-text">اكتب الفكرة الواحدة التي ستحملها معك من هذا اليوم</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="اكتب هنا..." oninput="trackText(this,'q8','s1')"></textarea>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-block">
+      <div class="q-number">سؤال 09</div>
+      <div class="q-text">كيف تقيّم عمق النقاش الكلي في اليوم الأول؟</div>
+      <div class="star-scale">
+        <div class="star-opt" onclick="selectStar(this,'q9','s1')">سطحي<br><small>Surface-level</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q9','s1')">مقبول<br><small>Decent</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q9','s1')">جيد<br><small>Good</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q9','s1')">عميق<br><small>Deep</small></div>
+        <div class="star-opt" onclick="selectStar(this,'q9','s1')">استثنائي<br><small>Exceptional</small></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="submit-area">
+    <button class="submit-btn" onclick="submitSurvey('s1')">إرسال استبيان اليوم الأول ←</button>
+  </div>
+</div>
+
+<!-- Thank You Screen -->
+<div id="thankyou" class="thankyou-screen">
+  <div class="ty-icon">🎬</div>
+  <div class="ty-title">شكرًا على مشاركتك</div>
+  <div class="ty-sub">إجاباتك ستُشكّل قرارات النسخة القادمة من الملتقى — صوتك جزء من ذاكرة المهرجان.<br><br><em>Your responses will shape the next edition. Your voice is part of the festival's memory.</em></div>
+  <button class="ty-back" onclick="window.location.href='index.html'">← العودة إلى الاستبيانات</button>
+</div>
+
+<script src="js/translations.js"></script>
+<script src="js/survey.js"></script>
+<script>
+// Initialize survey on load
+document.addEventListener('DOMContentLoaded', function() {
+  currentSurvey = 's1';
+  const savedLang = sessionStorage.getItem('selectedLanguage');
+  const savedUserInfo = sessionStorage.getItem('userInfo');
+  
+  if (savedLang && savedUserInfo) {
+    document.getElementById('survey-s1').style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>

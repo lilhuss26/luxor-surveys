@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استبيان الملتقى الكامل — ملتقى الأقصر للسينما الإفريقية</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Language Selection Modal -->
+<div id="language-modal">
+  <div class="lang-modal-content">
+    <div class="lang-modal-title">اختر لغتك</div>
+    <div class="lang-modal-subtitle">Select Your Language · Choisissez votre langue</div>
+    <div class="lang-options">
+      <button class="lang-btn" onclick="selectLanguage('ar')">العربية</button>
+      <button class="lang-btn" onclick="selectLanguage('en')">English</button>
+      <button class="lang-btn" onclick="selectLanguage('fr')">Français</button>
+    </div>
+  </div>
+</div>
+
+<!-- User Info Modal -->
+<div id="user-info-modal" class="hidden">
+  <div class="user-info-content">
+    <div class="user-info-title">معلوماتك</div>
+    <div class="user-info-subtitle">نحتاج بعض المعلومات قبل البدء</div>
+    <form id="user-info-form" onsubmit="submitUserInfo(event)">
+      <div class="form-group">
+        <label for="user-name" class="form-label">الاسم</label>
+        <input type="text" id="user-name" class="form-input" placeholder="أدخل اسمك الكامل" required>
+        <div id="name-error" class="form-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="user-email" class="form-label">البريد الإلكتروني</label>
+        <input type="email" id="user-email" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+        <div id="email-error" class="form-error"></div>
+      </div>
+      <button type="submit" class="form-submit">متابعة إلى الاستبيان</button>
+    </form>
+  </div>
+</div>
+
+<!-- Survey 3 - Full Forum -->
+<div id="survey-s3" class="survey-screen s3" style="display: none;">
+  <div class="survey-header">
+    <button class="back-btn" onclick="window.location.href='index.html'">← العودة</button>
+    <div class="survey-header-title">الملتقى كما عشته</div>
+    <div class="survey-header-sub">The Forum, As You Lived It — Full Evaluation</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="prog-s3" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="prog-text-s3">0 / 14</div>
+  </div>
+
+  <div class="questions-container">
+
+    <!-- SECTION A -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">أ — من أنت · Who You Are</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 01</div>
+      <div class="q-text">ما دورك المهني الأساسي؟</div>
+      <div class="choices horizontal">
+        <div class="choice-btn" onclick="select(this,'p1','مدير/ة مهرجان')">مدير/ة مهرجان</div>
+        <div class="choice-btn" onclick="select(this,'p1','مبرمج/ة أفلام')">مبرمج/ة أفلام</div>
+        <div class="choice-btn" onclick="select(this,'p1','صانع/ة أفلام')">صانع/ة أفلام</div>
+        <div class="choice-btn" onclick="select(this,'p1','باحث/ة أو أكاديمي/ة')">باحث/ة أو أكاديمي/ة</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 02</div>
+      <div class="q-text">من أي منطقة تأتي؟</div>
+      <div class="choices horizontal">
+        <div class="choice-btn" onclick="select(this,'p2','شمال إفريقيا')">شمال إفريقيا</div>
+        <div class="choice-btn" onclick="select(this,'p2','غرب إفريقيا')">غرب إفريقيا</div>
+        <div class="choice-btn" onclick="select(this,'p2','شرق إفريقيا')">شرق إفريقيا</div>
+        <div class="choice-btn" onclick="select(this,'p2','وسط / جنوب إفريقيا')">وسط / جنوب إفريقيا</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 03</div>
+      <div class="q-text">حجم مؤسستك أو مهرجانك</div>
+      <div class="choices horizontal">
+        <div class="choice-btn" onclick="select(this,'p3','ناشئ — أقل من 5 سنوات')">ناشئ — أقل من 5 سنوات</div>
+        <div class="choice-btn" onclick="select(this,'p3','متوسط — 5 إلى 15 سنة')">متوسط — 5 إلى 15 سنة</div>
+        <div class="choice-btn" onclick="select(this,'p3','راسخ — أكثر من 15 سنة')">راسخ — أكثر من 15 سنة</div>
+        <div class="choice-btn" onclick="select(this,'p3','باحث مستقل / أكاديمي')">باحث مستقل / أكاديمي</div>
+      </div>
+    </div>
+
+    <!-- SECTION B -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">ب — الجلسات الأربع · The Four Sessions</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 04</div>
+      <div class="q-text">قيّم عمق وجودة كل جلسة من الجلسات الأربع</div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px;">
+        <div>
+          <div style="font-size:0.82rem;opacity:0.65;margin-bottom:8px;">① برمجة أفلام الذكاء الاصطناعي ومعايير الإبداع</div>
+          <div class="star-scale" id="session1-stars">
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-1',1)">سطحي</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-1',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-1',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-1',4)">عميق</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-1',5)">استثنائي</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.82rem;opacity:0.65;margin-bottom:8px;">② البرمجة الهجينة والتحول الرقمي</div>
+          <div class="star-scale" id="session2-stars">
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-2',1)">سطحي</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-2',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-2',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-2',4)">عميق</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-2',5)">استثنائي</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.82rem;opacity:0.65;margin-bottom:8px;">③ الاستدامة البيئية في المهرجانات</div>
+          <div class="star-scale" id="session3-stars">
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-3',1)">سطحي</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-3',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-3',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-3',4)">عميق</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-3',5)">استثنائي</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.82rem;opacity:0.65;margin-bottom:8px;">④ تبادل الخبرات بين المهرجانات الجديدة والراسخة</div>
+          <div class="star-scale" id="session4-stars">
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-4',1)">سطحي</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-4',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-4',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-4',4)">عميق</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'s4-4',5)">استثنائي</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 05</div>
+      <div class="q-text">كيف تقيّم تنوع وتوازن المتحدثين عبر الجلسات الأربع؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q5-s3','ممتاز — تنوع جغرافي ومهني حقيقي')">ممتاز — تنوع جغرافي ومهني حقيقي</div>
+        <div class="choice-btn" onclick="select(this,'q5-s3','جيد مع بعض الفجوات الملحوظة')">جيد مع بعض الفجوات الملحوظة</div>
+        <div class="choice-btn" onclick="select(this,'q5-s3','هيمنت بعض المناطق أو التخصصات بشكل واضح')">هيمنت بعض المناطق أو التخصصات بشكل واضح</div>
+        <div class="choice-btn" onclick="select(this,'q5-s3','التنوع كان ضعيفًا ويحتاج مراجعة جذرية')">التنوع كان ضعيفًا ويحتاج مراجعة جذرية</div>
+      </div>
+    </div>
+
+    <!-- SECTION C -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">ج — التوصيات · The Recommendations</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 06</div>
+      <div class="q-text">إلى أي حد كانت التوصيات الصادرة عن الملتقى محددة وقابلة للتطبيق؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q6-s3','عامة جدًا — تفتقر للتفاصيل التطبيقية')">عامة جدًا — تفتقر للتفاصيل التطبيقية</div>
+        <div class="choice-btn" onclick="select(this,'q6-s3','متوسطة — تحتاج مزيدًا من التفصيل')">متوسطة — تحتاج مزيدًا من التفصيل</div>
+        <div class="choice-btn" onclick="select(this,'q6-s3','محددة جدًا وجاهزة للتطبيق')">محددة جدًا وجاهزة للتطبيق</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 07</div>
+      <div class="q-text">هل شعرت أن التوصيات انطلقت من واقع السينما الإفريقية أم متأثرة بنماذج عالمية؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q7-s3','منطلقة بعمق من الواقع الإفريقي')">منطلقة بعمق من الواقع الإفريقي</div>
+        <div class="choice-btn" onclick="select(this,'q7-s3','مزيج، إفريقية المنطلق لكن عالمية التأثر')">مزيج، إفريقية المنطلق لكن عالمية التأثر</div>
+        <div class="choice-btn" onclick="select(this,'q7-s3','طُبقت نماذج عالمية مع تكيّف إفريقي جزئي')">طُبقت نماذج عالمية مع تكيّف إفريقي جزئي</div>
+        <div class="choice-btn" onclick="select(this,'q7-s3','استيراد شبه كامل للنماذج الغربية أو الدولية')">استيراد شبه كامل للنماذج الغربية أو الدولية</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 08</div>
+      <div class="q-text">ما التوصية التي ترى أنها الأكثر قابلية للتأثير على مستقبل السينما الإفريقية؟</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" placeholder="اذكرها وأخبرنا لماذا..." oninput="trackText(this,'q8-s3','s3')"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION D -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">د — التجربة · The Experience</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 09</div>
+      <div class="q-text">كيف تقيّم الجوانب التنظيمية والعملية للملتقى؟</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+        <div>
+          <div style="font-size:0.8rem;opacity:0.6;margin-bottom:6px;">التوقيت وتنظيم الجلسات</div>
+          <div class="star-scale">
+            <div class="star-opt" onclick="selectSessionStar(this,'log-1',1)">ضعيف</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-1',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-1',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-1',4)">ممتاز</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem;opacity:0.6;margin-bottom:6px;">إمكانية الوصول اللغوي (ترجمة، لغات المتاحة)</div>
+          <div class="star-scale">
+            <div class="star-opt" onclick="selectSessionStar(this,'log-2',1)">ضعيف</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-2',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-2',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-2',4)">ممتاز</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem;opacity:0.6;margin-bottom:6px;">المواد والوثائق المتاحة للمشاركين</div>
+          <div class="star-scale">
+            <div class="star-opt" onclick="selectSessionStar(this,'log-3',1)">ضعيف</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-3',2)">مقبول</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-3',3)">جيد</div>
+            <div class="star-opt" onclick="selectSessionStar(this,'log-3',4)">ممتاز</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 10</div>
+      <div class="q-text">كيف تصف تجربتك الكلية في الملتقى؟</div>
+      <div class="emoji-scale">
+        <div class="emoji-btn" onclick="selectEmoji(this,'q10-s3')">😔<span class="emoji-label">مخيّبة</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q10-s3')">😐<span class="emoji-label">عادية</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q10-s3')">🙂<span class="emoji-label">جيدة</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q10-s3')">😊<span class="emoji-label">ممتازة</span></div>
+        <div class="emoji-btn" onclick="selectEmoji(this,'q10-s3')">🌟<span class="emoji-label">استثنائية</span></div>
+      </div>
+    </div>
+
+    <!-- SECTION E -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">هـ — النظرة للأمام · Looking Forward</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 11</div>
+      <div class="q-text">ما الموضوع الذي يجب أن تتصدر به النسخة الثالثة من الملتقى؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q11-s3','تمويل السينما الإفريقية المستقلة في زمن المنصات الكبرى')">تمويل السينما الإفريقية المستقلة في زمن المنصات الكبرى</div>
+        <div class="choice-btn" onclick="select(this,'q11-s3','بناء جمهور السينما الإفريقية محليًا وعالميًا')">بناء جمهور السينما الإفريقية محليًا وعالميًا</div>
+        <div class="choice-btn" onclick="select(this,'q11-s3','السينما الإفريقية والهوية بين التمثيل والنمطية')">السينما الإفريقية والهوية بين التمثيل والنمطية</div>
+        <div class="choice-btn" onclick="select(this,'q11-s3','التعليم السينمائي وأجيال القادمة من إفريقيا')">التعليم السينمائي وأجيال القادمة من إفريقيا</div>
+        <div class="choice-btn" onclick="select(this,'q11-s3','موضوع آخر سأذكره في الملاحظات')">موضوع آخر سأذكره في الملاحظات</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 12</div>
+      <div class="q-text">هل يجب أن يظل الملتقى يومين أم يمتد لأكثر؟</div>
+      <div class="choices horizontal">
+        <div class="choice-btn" onclick="select(this,'q12-s3','يومان')">يومان</div>
+        <div class="choice-btn" onclick="select(this,'q12-s3','ثلاثة أيام')">ثلاثة أيام</div>
+        <div class="choice-btn" onclick="select(this,'q12-s3','يوم واحد مكثف')">يوم واحد مكثف</div>
+        <div class="choice-btn" onclick="select(this,'q12-s3','هجين (حضوري وأونلاين متتالي)')">هجين (حضوري وأونلاين متتالي)</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 13</div>
+      <div class="q-text">ما أهم تغيير تقترحه على فريق التنظيم لجعل الملتقى أكثر تأثيرًا؟</div>
+      <div class="choices">
+        <div class="choice-btn" onclick="select(this,'q13-s3','ورش عمل تطبيقية بجانب جلسات النقاش')">ورش عمل تطبيقية بجانب جلسات النقاش</div>
+        <div class="choice-btn" onclick="select(this,'q13-s3','آليات متابعة واضحة لتنفيذ التوصيات بعد الملتقى')">آليات متابعة واضحة لتنفيذ التوصيات بعد الملتقى</div>
+        <div class="choice-btn" onclick="select(this,'q13-s3','توسيع التمثيل الجغرافي من القارة الإفريقية')">توسيع التمثيل الجغرافي من القارة الإفريقية</div>
+        <div class="choice-btn" onclick="select(this,'q13-s3','إنتاج وثيقة سياسات رسمية صادرة عن الملتقى')">إنتاج وثيقة سياسات رسمية صادرة عن الملتقى</div>
+        <div class="choice-btn" onclick="select(this,'q13-s3','إشراك جمهور المهرجان والمجتمع المحلي في الحوار')">إشراك جمهور المهرجان والمجتمع المحلي في الحوار</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-number">سؤال 14</div>
+      <div class="q-text">أي شيء لم يرد في الأسئلة السابقة وتريد إخباره لفريق التنظيم</div>
+      <div class="postcard-frame">
+        <textarea class="open-text" style="min-height:130px;" placeholder="الملتقى كما عشته، بكلماتك أنت..." oninput="trackText(this,'q14-s3','s3')"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="submit-area">
+    <button class="submit-btn" onclick="submitSurvey('s3')">إرسال التقييم الختامي ←</button>
+  </div>
+</div>
+
+<!-- Thank You Screen -->
+<div id="thankyou" class="thankyou-screen">
+  <div class="ty-icon">🎬</div>
+  <div class="ty-title">شكرًا على مشاركتك</div>
+  <div class="ty-sub">إجاباتك ستُشكّل قرارات النسخة القادمة من الملتقى — صوتك جزء من ذاكرة المهرجان.<br><br><em>Your responses will shape the next edition. Your voice is part of the festival's memory.</em></div>
+  <button class="ty-back" onclick="window.location.href='index.html'">← العودة إلى الاستبيانات</button>
+</div>
+
+<script src="js/translations.js"></script>
+<script src="js/survey.js"></script>
+<script>
+// Initialize survey on load
+document.addEventListener('DOMContentLoaded', function() {
+  currentSurvey = 's3';
+  const savedLang = sessionStorage.getItem('selectedLanguage');
+  const savedUserInfo = sessionStorage.getItem('userInfo');
+  
+  if (savedLang && savedUserInfo) {
+    document.getElementById('survey-s3').style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
