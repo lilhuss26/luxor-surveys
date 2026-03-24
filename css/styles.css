@@ -324,7 +324,11 @@ body {
   line-height: 1.7;
   opacity: 0.65;
   margin-bottom: 28px;
+  color: #FFFFFF !important;
 }
+.card-day1 .card-desc { color: #FFFFFF !important; }
+.card-day2 .card-desc { color: #FFFFFF !important; }
+.card-full .card-desc { color: #FFFFFF !important; }
 
 .card-meta {
   display: flex;

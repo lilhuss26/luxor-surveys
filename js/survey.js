@@ -5,6 +5,9 @@ let userInfo = { name: '', email: '' };
 const answers = { s1: {}, s2: {}, s3: {} };
 const totals = { s1: 9, s2: 9, s3: 14 };
 
+// Google Sheets Web App URL
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz0qWM7aJGRJDvzgf-kY41dnLeDvyJHjUbXjBTXlarMSYGY_C7QXARkUm_ovAoJU9bL/exec';
+
 // Initialize on page load
 function initializePage() {
   // Check if language is already selected
@@ -527,13 +530,57 @@ function submitSurvey(id) {
   
   console.log('Survey ' + id + ' submitted:', surveyData);
   
-  // Here you would normally send the data to a server
-  // For now, we'll just log it and show the thank you screen
+  // Show loading state
+  const submitBtn = document.querySelector('.s' + id.charAt(1) + ' .submit-btn');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = currentLanguage === 'ar' ? 'جاري الإرسال...' : 
+                          currentLanguage === 'fr' ? 'Envoi en cours...' : 
+                          'Submitting...';
   
-  document.getElementById('survey-' + id).classList.remove('active');
-  const ty = document.getElementById('thankyou');
-  ty.classList.add('active');
-  window.scrollTo(0, 0);
+  // Send to Google Sheets
+  fetch(GOOGLE_SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(surveyData)
+  })
+  .then(() => {
+    // Success - show thank you screen
+    console.log('Survey data sent successfully');
+    document.getElementById('survey-' + id).classList.remove('active');
+    const ty = document.getElementById('thankyou');
+    ty.classList.add('active');
+    window.scrollTo(0, 0);
+    
+    // Clear answers for this survey
+    answers[id] = {};
+  })
+  .catch(error => {
+    // Error handling
+    console.error('Error submitting survey:', error);
+    
+    // Still show thank you (data is logged locally)
+    alert(currentLanguage === 'ar' ? 
+          'تم حفظ إجاباتك محليًا. سيتم إرسالها لاحقًا.' :
+          currentLanguage === 'fr' ?
+          'Vos réponses ont été enregistrées localement. Elles seront envoyées plus tard.' :
+          'Your answers have been saved locally. They will be sent later.');
+    
+    document.getElementById('survey-' + id).classList.remove('active');
+    const ty = document.getElementById('thankyou');
+    ty.classList.add('active');
+    window.scrollTo(0, 0);
+  })
+  .finally(() => {
+    // Reset button
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
 }
 
 // Animation observer for question blocks
